@@ -1,0 +1,177 @@
+.next-month {
+    transform: rotate(180deg);
+}
+
+.datepicker {
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.month-year {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.weekdays, .days {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.weekdays span, .days span {
+    width: 14.28%;
+    text-align: center;
+    padding: 12px 0;
+}
+
+.datepicker-day {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.days .disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+
+.days .active span {
+    border-radius: 50%;
+    background: #5b9396;
+    color: white;
+    padding: 10px 15px;
+}
+
+.schedules-block {
+    gap: 19px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px;
+}
+
+.schedule_period {
+    margin: 4px;
+    flex: 0 1 calc(27.33333%);
+    width: 106px;
+    min-width: 85px;
+    justify-content: center;
+    line-height: 20px;
+    display: block;
+    padding: 10px 5px;
+    border-radius: 100px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: black;
+    background-color: #ececec;
+}
+
+.active_period {
+    background: #5b9396;
+    color: white;
+}
+
+.empty-periods {
+    text-align: center;
+    color: #9b9b9b;
+    margin: 0 auto;
+}
+
+.action_btn_container {
+    display: none;
+}
+
+.action_text {
+    width: 100%;
+    margin-left: -15px;
+    text-align: center;
+    position: relative;
+    color: white;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    background: #5b9396;
+}
+
+.days .active .double-digit {
+    padding: 13px 15px;
+}
+
+
+/* mobile */
+@media only screen and (max-width: 480px) {
+    .schedules-block {
+        font-size: 14px;
+    }
+
+    .month-year {
+        font-size: 16px ;
+    }
+
+    .days, .weekdays {
+        font-size: 14px;
+    }
+
+    .days .active span {
+        padding: 8px 12px !important;
+    }
+
+    .active span.double-digit {
+        padding: 8px 8px !important;
+    }
+
+    .header-container {
+        min-height: 15px;
+    }
+
+    .schedules-block {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .date-container {
+        font-size: 14px ;
+    }
+
+    .time-container {
+        font-size: 14px ;
+    }
+
+    .title {
+        font-size: 16px ;
+    }
+
+    .form-input__input {
+        font-size: 14px ;
+    }
+
+    .service-title {
+        font-size: 14px ;
+    }
+
+    .service-price {
+        font-size: 14px ;
+    }
+
+    .select2-selection__rendered {
+        font-size: 14px ;
+    }
+}
+
+/* end mobile */

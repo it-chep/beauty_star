@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/select2.min.css" %}">
+    {% if settings.favicon %}
+        <link rel="shortcut icon" href="{{ settings.favicon.url }}" type="image/png">
+    {% endif %}
+    <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
+    <script src="{% static "js/select2.min.js" %}"></script>
+    <script src="{% static "js/jquery-ui.min.js" %}"></script>
+    <script src="{% static "main_site/js/base.js" %}"></script>
+
+    {% block extra_scripts %}
+    {% endblock %}
+
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    {% block extra_links %}
+    {% endblock %}
+
+    <style>
+        {% block extra_styles %}
+        {% endblock %}
+    </style>
+
+</head>
+<body>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static "main_site/js/online_booking.js" %}"></script>
+{% endblock %}
+
+{% block title %}
+    Выбор услуги
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/online_booking.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-wrapper">
+        <div class="header-container"></div>
+        <div class="header-panel">
+            {% if settings.logo %}
+                <a class="logo" href="{% url "homepage" %}">
+                    <img src="{{ settings.logo.url }}" alt="">
+                </a>
+            {% endif %}
+            <div class="title">Завиток</div>
+            <div class="address">Никитина 16</div>
+        </div>
+        <div class="container">
+
+            <div class="menu-items-container">
+                <div class="menu-item-container">
+                    <a class="menu-item" href="{% url "get_worker" %}">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon-container">
+                                <img src="{% static "main_site/img/users.svg" %}">
+                            </div>
+                        </div>
+                        <div class="menu-item-text">
+                            МАСТЕР
+                        </div>
+                        <div class="next-step-icon">
+                            <img src="{% static "main_site/img/arrow.svg" %}">
+                        </div>
+                    </a>
+                </div>
+                <div class="menu-item-container">
+                    <a class="menu-item" href="{% url "get_time" %}">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon-container">
+                                <img src="{% static "main_site/img/calendar.svg" %}">
+                            </div>
+                        </div>
+                        <div class="menu-item-text">
+                            ВРЕМЯ
+                        </div>
+                        <div class="next-step-icon">
+                            <img src="{% static "main_site/img/arrow.svg" %}">
+                        </div>
+                    </a>
+                </div>
+                <div class="menu-item-container">
+                    <a class="menu-item" href="{% url "get_service" %}">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon-container">
+                                <img src="{% static "main_site/img/list.svg" %}">
+                            </div>
+                        </div>
+                        <div class="menu-item-text">
+                            УСЛУГА
+                        </div>
+                        <div class="next-step-icon">
+                            <img src="{% static "main_site/img/arrow.svg" %}">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

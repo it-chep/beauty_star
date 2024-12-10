@@ -1,0 +1,27 @@
+# Platform and IDE-generated files
+.DS_Store
+.idea
+.project
+.pydevproject
+.vscode
+.devcontainer
+
+# Python-related ignores
+*.pyc
+*.pyo
+
+# Virtual environment folders
+.Python
+bin/
+/include/
+lib/
+!/agora/apps/contractor/lib/
+local/
+src/
+share/
+node_modules/
+
+/dumps
+.env
+.venv
+media/

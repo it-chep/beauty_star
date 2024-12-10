@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block title %}
+    Упс, ошибка!
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/error_page.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="text">
+            <div class="text_1">
+                К сожалению,<br> что-то пошло не так
+            </div>
+            <div class="text_2">
+                Пожалуйста, попробуйте обновить страницу или вернитесь позже :(
+            </div>
+        </div>
+        <a class="action_btn_container" href="{% url "homepage" %}">
+            <div class="action_text_negative">
+                Домой
+            </div>
+        </a>
+        <div class="wifi">
+            <div class="wifi_1">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_2">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_3">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_4">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_5">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_6">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_7">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+            <div class="wifi_8">
+                <img src="{% static "main_site/img/wifi.svg" %}">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,215 @@
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    height: 100vh;
+}
+
+.container-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding-bottom: 100px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container {
+    min-height: 140px;
+    width: 100%;
+    padding: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #f5f5f5;
+}
+
+.header-panel {
+    position: relative;
+    padding: 20px 16px 16px;
+    border-radius: 24px 24px 0 0;
+    margin-top: -20px;
+    background-color: white;
+}
+
+.container {
+    width: 600px;
+}
+
+.logo {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.address {
+    font-size: 14px;
+    color: #808080;
+    margin-bottom: 20px;
+}
+
+.menu-item-container {
+    display: block;
+    padding: 8px 0;
+}
+
+.menu-item-container:hover {
+    cursor: pointer;
+}
+
+.logo-icon-container {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ebebeb;
+    border-radius: 50%;
+}
+
+.menu-item-logo {
+    width: 48px;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.menu-item-text {
+    flex: 1 1 0;
+    align-self: stretch;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2B3134;
+}
+
+.next-step-icon {
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.menu-item {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    display: inline-flex;
+}
+
+.footer {
+    font-size: 12px;
+    color: #bbb;
+    margin-top: 20px;
+}
+
+.back-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* mobile */
+@media only screen and (max-width: 480px) {
+    .container-wrapper {
+        max-width: 280px;
+    }
+
+    .container {
+        width: 280px;
+    }
+
+    .menu-item-text {
+        font-size: 14px;
+    }
+
+    .worker_name {
+        font-size: 14px;
+    }
+
+    .action_btn_container {
+        width: 280px;
+    }
+
+    .action_text {
+        font-size: 14px;
+    }
+
+    .service-item {
+        font-size: 14px;
+    }
+
+    .schedules-block {
+        font-size: 14px;
+    }
+
+    .month-year {
+        font-size: 16px !important;
+    }
+
+    .days, .weekdays {
+        font-size: 14px;
+    }
+
+    .days .active span {
+        padding: 8px 12px !important;
+    }
+
+    .active span.double-digit {
+        padding: 8px 8px !important;
+    }
+
+    .header-container {
+        min-height: 15px;
+    }
+
+    .schedules-block {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .date-container {
+        font-size: 14px !important;
+    }
+
+    .time-container {
+        font-size: 14px !important;
+    }
+
+    .title {
+        font-size: 16px !important;
+    }
+
+    .form-input__input {
+        font-size: 14px !important;
+    }
+
+    .service-title {
+        font-size: 14px !important;
+    }
+
+    .service-price {
+        font-size: 14px !important;
+    }
+
+    .select2-selection__rendered {
+        font-size: 14px !important;
+    }
+}
+
+/* end mobile */

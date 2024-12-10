@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static "main_site/js/catalog.js" %}"></script>
+{% endblock %}
+
+{% block title %}
+    Просмотр товаров
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/catalog.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="products-container">
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">
+                            {{ product.name }}
+                        </div>
+                        <div class="product-description">
+                            {{ product.description }}
+                        </div>
+                        <div class="product-price">
+                            {{ product.price }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

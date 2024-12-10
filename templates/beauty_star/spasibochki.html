@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}
+
+{% block title %}
+    Выбор услуги
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/choose_workers.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/online_booking.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/spasibochki.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-wrapper">
+        <div class="header-container"></div>
+        <div class="header-panel">
+            {% if settings.logo %}
+                <a class="logo" href="{% url "homepage" %}">
+                    <img src="{{ settings.logo.url }}" alt="">
+                </a>
+            {% endif %}
+            <div class="title">Завиток</div>
+            <div class="address">Никитина 16</div>
+        </div>
+        <div class="container">
+            <div class="menu-items-container">
+                <div class="success-container">
+                    <div class="success-sign">
+                        <div class="successfull_appointment">
+                            <div style="margin-bottom: 3px;">
+                                <img src="{% static "main_site/img/success.png" %}" alt="">
+                                <span>ЗАПИСЬ УСПЕШНА</span>
+                            </div>
+                            <span class="address-name">
+                                Никитина 16
+                            </span>
+                        </div>
+                        <div class="cancel-appointment">
+                            Отменить запись
+                        </div>
+                    </div>
+                    <div class="success-address">
+                        <span style="font-weight: bold">{{ appointment.schedule_period.schedule.date }}</span>
+                        <span class="grey-text">начало в {{ appointment.schedule_period.date_time_start }}</span>
+                    </div>
+                    <div class="success-worker">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon-container">
+                                <img src="{{ appointment.schedule_period.schedule.worker.photo.url }}">
+                            </div>
+                        </div>
+                        <div class="menu-item-text-container">
+                            <div class="worker_name">
+                                {{ appointment.schedule_period.schedule.worker.name }} {{ appointment.schedule_period.schedule.worker.surname }}
+                                <a class="info_btn"
+                                   href="{% url "worker_info" worker_id=appointment.schedule_period.schedule.worker.id %}">
+                                    <img src="{% static "main_site/img/info.svg" %}">
+                                </a>
+                            </div>
+                            <div class="worker_services">
+                                {{ appointment.schedule_period.schedule.worker.service_group_display }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="success-service">
+                        <div class="left-col">
+                            <span style="font-weight: bold">УСЛУГА</span>
+                            <span class="grey-text">{{ appointment.schedule_period.schedule.service.name }}</span>
+                        </div>
+                        <div class="right-col">
+                            от {{ appointment.schedule_period.schedule.service.price|floatformat:0 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="info-container">
+                    <p>
+                        Благодарим вас за запись и с нетерпением ждем встречи!<br>О записи вам напомнит администратор.
+                    </p>
+                    <p>
+                        Вы так же можете записаться на другую процедуру, нажав<br> на кнопку.
+                    </p>
+                </div>
+            </div>
+            <a class="action_btn_container" href="{% url "online_booking" %}">
+                <div class="action_text">
+                    Записаться на другую услугу
+                </div>
+            </a>
+            <div class="information_block">
+                <div class="block_working">
+                    <div>
+                        <h3>Завиток</h3>
+                        <div>
+                            Ул. Ломоносова 48 1а
+                        </div>
+                    </div>
+                    <div class="working-hours">
+                        ПН-ВС: 10:00 — 21:00
+                    </div>
+                </div>
+
+                <div class="right-col" style="position:relative;overflow:hidden;text-align: center"><a
+                        href="https://yandex.ru/maps/103817/moskovsky/?utm_medium=mapframe&utm_source=maps"
+                        style="color:#eee;font-size:12px;position:absolute;top:0px;">Московский</a><a
+                        href="https://yandex.ru/maps/103817/moskovsky/house/ulitsa_nikitina_16/Z04YdQFoSkUPQFtvfXpxdXRgYA==/?ll=37.368308%2C55.604834&utm_medium=mapframe&utm_source=maps&z=16.8"
+                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Никитина, 16 —
+                    Яндекс Карты</a>
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=37.368308%2C55.604834&mode=whatshere&whatshere%5Bpoint%5D=37.368032%2C55.604825&whatshere%5Bzoom%5D=17&z=16.8"
+                            width="560" height="400" frameborder="1" allowfullscreen="true"
+                            style="border: unset;border-radius: 8px;position:relative;"></iframe>
+                </div>
+                <div class="contacts">
+                    <div>
+                        <div>
+                            <h3>Контакты</h3>
+                        </div>
+                        {% if settings.support_phone %}
+                            <div>
+                                <a href="tel:{{ settings.support_phone }}"
+                                   class="phone">{{ settings.support_phone }}</a>
+                            </div>
+                        {% endif %}
+                        {% if settings.support_email %}
+                            <div>
+                                <a href="mailto:{{ settings.support_email }}"
+                                   class="email">{{ settings.support_email }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="society_container">
+                        {% if settings.telegram_url %}
+                            <a href="{{ settings.telegram_url }}">
+                                <img src="{% static "main_site/img/telegram_logo.svg" %}" alt="telegram">
+                            </a>
+                        {% endif %}
+                        {% if settings.whatsapp_url %}
+                            <a href="{{ settings.whatsapp_url }}">
+                                <img src="{% static "main_site/img/whatsapp_logo.png" %}" alt="whatsapp">
+                            </a>
+                        {% endif %}
+                        {% if settings.instagram_url %}
+                            <a href="{{ settings.instagram_url }}">
+                                <img src="{% static "main_site/img/instagram_logo.png" %}" alt="instagram">
+                            </a>
+                        {% endif %}
+                        {% if settings.youtube_url %}
+                            <a href="{{ settings.youtube_url }}">
+                                <img src="{% static "main_site/img/youtube_logo.svg" %}" alt="youtube" class="youtube">
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

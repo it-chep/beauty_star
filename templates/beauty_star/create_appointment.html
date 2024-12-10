@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static "main_site/js/create_appointment.js" %}"></script>
+{% endblock %}
+
+{% block title %}
+    Онлайн запись
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/online_booking.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/worker_detail.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/choose_workers.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/get_service.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/create_appointment.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-wrapper">
+        <div class="header-container"></div>
+        <div class="header-panel">
+            <div class="back-logo">
+                {% if settings.logo %}
+                    <a class="logo" href="{% url "homepage" %}">
+                        <img src="{{ settings.logo.url }}" alt="">
+                    </a>
+                {% endif %}
+            </div>
+            <div>
+                <div class="title">Завиток</div>
+                <div class="address">Никитина 16</div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="menu-items-container">
+                <div class="details-container info-container">
+                    <div class="details-header">
+                        <p class="title">Детали записи</p>
+                    </div>
+                    <div class="menu-item worker-container" id="{{ worker.id }}">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon-container">
+                                <img src="{{ worker.photo.url }}">
+                            </div>
+                        </div>
+                        <div class="menu-item-text-container">
+                            <div class="worker_name">
+                                {{ worker.name }} {{ worker.surname }}
+                            </div>
+                            <div class="worker_services" style="margin-top: -3px;">
+                                {{ worker.service_group_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="period-container">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon">
+                                <img src="{% static "main_site/img/calendar.svg" %}">
+                            </div>
+                        </div>
+                        <div class="date-time-container">
+                            <div class="date-container">
+                                {{ date }}
+                            </div>
+                            <div class="time-container">
+                                Начало в {{ time }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="underline"></div>
+
+                <div class="info-container">
+                    <div class="services-header">
+                        <p class="title">Услуги</p>
+                    </div>
+                    <div class="services-container">
+                        {% for service in services %}
+                            <div class="item-container" id="{{ service.id }}">
+                                <div class="service-item-container">
+                                    <div class="service-item">
+                                        <div class="service-title">{{ service.name }}</div>
+                                        <div class="service-time_over">{{ service.time_over }} min
+                                            <div class="service_description"></div>
+                                        </div>
+                                    </div>
+                                    <div class="service-price">от {{ service.price|floatformat:0 }} ₽</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="underline"></div>
+                <div class="info-container">
+                    <p class="title">Ваши данные</p>
+                    <form id="appointment_form" method="post" action="{% url 'create_appointment' %}">
+                        {% csrf_token %}
+                        {{ form.period_id }}
+                        {{ form.worker_id }}
+                        {{ form.service_id }}
+                        <div class="form-input">
+                            <p class="form-input__label">{{ form.name.label }}</p>
+                            <label class="form-input__container">
+                                {{ form.name }}
+                            </label>
+                        </div>
+                        <div class="form-input">
+                            <p class="form-input__label">{{ form.phone.label }}</p>
+                            <label class="form-input__container">
+                                {{ form.phone }}
+                            </label>
+                        </div>
+                        <div class="form-input">
+                            <p class="form-input__label">{{ form.email.label }}</p>
+                            <label class="form-input__container">
+                                {{ form.email }}
+                            </label>
+                        </div>
+                        <div class="form-input">
+                            <p class="form-input__label">{{ form.comment.label }}</p>
+                            <label class="form-input__container">
+                                {{ form.comment }}
+                            </label>
+                        </div>
+                        <div class="form-input">
+                            <p class="form-input__label">{{ form.notification_choice.label }}</p>
+                            <label class="form-input__container">
+                                {{ form.notification_choice }}
+                            </label>
+                        </div>
+                        <div class="form-input">
+                            <div class="form-input__input_checkbox">
+                                {{ form.privacy_policy }}
+                            </div>
+                        </div>
+                    </form>
+                    <div class="action_btn_container" data-url="{% url "create_appointment" %}">
+                        <div class="action_text">
+                            Записаться
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

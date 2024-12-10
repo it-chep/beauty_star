@@ -1,0 +1,47 @@
+.service-item-container {
+    flex: 1 1 0;
+    align-self: stretch;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+    overflow: hidden;
+}
+
+.service-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    overflow: hidden;
+    display: inline;
+    color: #2c2c2c;
+    text-transform: uppercase
+}
+
+.service-time_over {
+    padding-top: 5px;
+    color: #857A77;
+}
+
+.service-price {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2c2c2c;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.item-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 20px;
+    cursor: pointer;
+}
+
+

@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static "main_site/js/main_page.js" %}"></script>
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/main_page.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="first-block-container">
+        <div class="container">
+            <label class="burger" for="burger" id="burger-label">
+                <input type="checkbox" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class="mobile-navbar" id="mobile-navbar">
+                <div class="mobile-header-item">
+                    <a href="{% if all_cells %}#popular-services{% else %}{% url 'get_service' %}{% endif %}"
+                       class="smooth-scroll">Услуги</a>
+                </div>
+                <div class="mobile-header-item">
+                    <a href="#price-list-block" class="smooth-scroll">Прайс лист</a>
+                </div>
+                <div class="mobile-header-item">
+                    <a href="#address" class="smooth-scroll">Адрес</a>
+                </div>
+                <div class="mobile-header-item">
+                    <a class="create-appointment-link" href="{% url 'online_booking' %}">Онлайн запись</a>
+                </div>
+            </div>
+
+            <div class="header-container">
+                {% if settings.logo %}
+                    <a class="logo" href="{% url "homepage" %}">
+                        <img src="{{ settings.logo.url }}" alt="">
+                    </a>
+                {% endif %}
+
+                <nav>
+                    <div class="header-items-list">
+                        <div class="header-item"><a
+                                href="{% if all_cells %}#popular-services{% else %}{% url "get_service" %}{% endif %}"
+                                class="smooth-scroll">Услуги</a></div>
+                        <div class="header-item"><a href="#price-list-block" class="smooth-scroll">Прайс лист</a></div>
+                        <div class="header-item"><a href="#address" class="smooth-scroll">Адрес</a></div>
+                    </div>
+                </nav>
+                {% if settings.support_phone %}
+                    <a href="tel:{{ settings.support_phone }}" class="phone"
+                       style="padding: 5px 15px;">{{ settings.support_phone }}</a>
+                {% endif %}
+            </div>
+
+            <div class="first-block-info">
+                <div class="first-block-text">
+                    <h1>ЗАВИТОК - ЭТО ПРО ЛЮБОВЬ К СЕБЕ И ДЕТАЛЯМ</h1>
+                    <p>Мы поможем вам стать увереннее в себе и пусть каждый ваш день будет наполнен красотой</p>
+                    <div class="create-appointment-button-container">
+                        <a class="create-appointment-button" href="{% url "online_booking" %}">Онлайн запись</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="second-block-container" id="popular-services">
+            <h2>НАШИ МАСТЕРА</h2>
+            <div class="workers-container">
+                {% for worker in workers %}
+                    <a class="worker_card" href="{% url "get_service" %}?worker_id={{worker.id}}">
+                        <div class="worker-photo">
+                            <img src="{{ worker.photo.url }}">
+                        </div>
+                        <div class="worker-info">
+                            <div class="worker-name">
+                                {{ worker.full_name }}
+                            </div>
+                            <div class="worker-additional_info">
+                                {{ worker.job_title|default:"" }}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="slider-help-container">
+                <img class="slider-help-img" src="{% static "main_site/img/slider-help-logo.png" %}">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="third-block-container" id="price-list-block">
+            <h2 class="third-block-header">ПРАЙС-ЛИСТ</h2>
+            <div class="service_group_container">
+                {% for group in service_groups %}
+                    {% if group.has_services %}
+                        <div class="service-group {% if forloop.counter == 1 %}first{% endif %}"
+                             id="service_group_id_{{ group.id }}">
+                            <div class="service_group_name" data-target="#services_{{ group.id }}">
+                                {{ group.name }}
+                                <img src="{% static "img/arrow.svg" %}" class="arrow-icon">
+                            </div>
+                        </div>
+                        <div class="services" id="services_{{ group.id }}">
+                            {% for subgroup in group.subgroups.all %}
+                                <div class="services-container">
+                                    {% for service in subgroup.services.all %}
+                                        <div class="main_service">
+                                            <a href="{% url "get_worker" %}?service_id={{ service.id }}">
+                                                <img src="{% static "main_site/img/plus.svg" %}"
+                                                     title="Записаться на услугу"><span>{{ service.name }}</span>
+                                            </a>
+                                            <span>от {{ service.price|floatformat:0 }} ₽</span></div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="forth-block-container">
+            <h2 class="forth-block-header">О НАС</h2>
+            <div class="about_1">
+                ЗАВИТОК - это салон, в котором все самые смелые желания становятся реальностью. Мы сохраним и
+                приумножим вашу красоту и подарим прекрасную возможность стать смелее в своих желаниях.
+            </div>
+            <br>
+            <div class="about_2">
+                Наша миссия - подчеркнуть вашу индивидуальность и поддержать самые смелые решения.
+                Профессионализм наших специалистов оставит вас довольными результатом.
+            </div>
+            <div class="cases_slider">
+                <img src="{% static "main_site/img/cases/blonde-female-getting-new-hairstyle-hair-salon (1) 1.png" %}">
+                <img src="{% static "main_site/img/cases/woman-setting-hair-girl-parlor 1.png" %}">
+                <img src="{% static "main_site/img/cases/blonde-female-getting-new-hairstyle-hair-salon (1) 1.png" %}">
+                <img src="{% static "main_site/img/cases/woman-setting-hair-girl-parlor 1.png" %}">
+                <img src="{% static "main_site/img/cases/blonde-female-getting-new-hairstyle-hair-salon (1) 1.png" %}">
+                <img src="{% static "main_site/img/cases/woman-setting-hair-girl-parlor 1.png" %}">
+            </div>
+            <div class="slider-help-container">
+                <img class="slider-help-img" src="{% static "main_site/img/slider-help-logo.png" %}">
+            </div>
+        </div>
+    </div>
+    <div class="container five">
+        <div class="five-block-container" id="address">
+            <h2 class="five-block-header">АДРЕС</h2>
+            <div class="five-block-content">
+                <div class="left-col">
+                    <div class="block_working">
+                        <h2>Завиток</h2>
+                        <div class="address-name">
+                            Ул. Ломоносова 48 1а
+                        </div>
+                        <div class="working-hours">
+                            ПН-ВС: 10:00 — 21:00
+                        </div>
+                    </div>
+                    <div class="block_society">
+                        <div>
+                            <h2>Контакты</h2>
+                        </div>
+                        {% if settings.support_phone %}
+                            <div>
+                                <a href="tel:{{ settings.support_phone }}"
+                                   class="phone">{{ settings.support_phone }}</a>
+                            </div>
+                        {% endif %}
+                        <div class="society_container">
+                            {% if settings.telegram_url %}
+                                <a href="{{ settings.telegram_url }}">
+                                    <img src="{% static "main_site/img/telegram_logo.svg" %}" alt="telegram">
+                                </a>
+                            {% endif %}
+                            {% if settings.whatsapp_url %}
+                                <a href="{{ settings.whatsapp_url }}">
+                                    <img src="{% static "main_site/img/whatsapp_logo.png" %}" alt="whatsapp">
+                                </a>
+                            {% endif %}
+                            {% if settings.instagram_url %}
+                                <a href="{{ settings.instagram_url }}">
+                                    <img src="{% static "main_site/img/instagram_logo.png" %}" alt="instagram">
+                                </a>
+                            {% endif %}
+                            {% if settings.youtube_url %}
+                                <a href="{{ settings.youtube_url }}">
+                                    <img src="{% static "main_site/img/youtube_logo.svg" %}" alt="youtube"
+                                         class="youtube">
+                                </a>
+                            {% endif %}
+                        </div>
+                        {% if settings.support_email %}
+                            <div>
+                                <a href="mailto:{{ settings.support_email }}"
+                                   class="email">{{ settings.support_email }}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="right-col" style="position:relative;overflow:hidden;"><a
+                        href="https://yandex.ru/maps/103817/moskovsky/?utm_medium=mapframe&utm_source=maps"
+                        style="color:#eee;font-size:12px;position:absolute;top:0px;">Московский</a><a
+                        href="https://yandex.ru/maps/103817/moskovsky/house/ulitsa_nikitina_16/Z04YdQFoSkUPQFtvfXpxdXRgYA==/?ll=37.368308%2C55.604834&utm_medium=mapframe&utm_source=maps&z=16.8"
+                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Никитина, 16 —
+                    Яндекс Карты</a>
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=37.368308%2C55.604834&mode=whatshere&whatshere%5Bpoint%5D=37.368032%2C55.604825&whatshere%5Bzoom%5D=17&z=16.8"
+                            width="900" height="400" frameborder="1" allowfullscreen="true"
+                            style="border: unset;border-radius: 8px;position:relative;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="backToTop" class="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-chevron-up">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+    <footer>
+        <div class="clearfix" style="width: 145px">
+            {% if settings.logo %}
+                <a class="logo" href="{% url "homepage" %}">
+                    <img src="{{ settings.logo.url }}" alt="">
+                </a>
+            {% endif %}
+        </div>
+        <div class="policy_container">
+            <a href="https://t.me/maxim_jordan">
+                Политика конфиденциальности
+            </a>
+            <a href="https://t.me/maxim_jordan">
+                Договор оферты
+            </a>
+        </div>
+        <div class="society_container">
+            {% if settings.telegram_url %}
+                <a href="{{ settings.telegram_url }}">
+                    <img src="{% static "main_site/img/telegram_logo.svg" %}" alt="telegram">
+                </a>
+            {% endif %}
+            {% if settings.whatsapp_url %}
+                <a href="{{ settings.whatsapp_url }}">
+                    <img src="{% static "main_site/img/whatsapp_logo.png" %}" alt="whatsapp">
+                </a>
+            {% endif %}
+            {% if settings.instagram_url %}
+                <a href="{{ settings.instagram_url }}">
+                    <img src="{% static "main_site/img/instagram_logo.png" %}" alt="instagram">
+                </a>
+            {% endif %}
+            {% if settings.youtube_url %}
+                <a href="{{ settings.youtube_url }}">
+                    <img src="{% static "main_site/img/youtube_logo.svg" %}" alt="youtube" class="youtube">
+                </a>
+            {% endif %}
+        </div>
+    </footer>
+{% endblock %}

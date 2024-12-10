@@ -1,0 +1,39 @@
+version: "3.6"
+
+services:
+  beauty-postgres:
+    image: postgres:14.8
+    shm_size: 1g
+    container_name: beauty-postgres
+    command: ["postgres", "-c", "log_statement=all"]
+    networks:
+      - beauty-network
+    environment:
+      - POSTGRES_INITDB_WALDIR=/var/log/pg_logs
+      - POSTGRES_PASSWORD=beauty
+      - POSTGRES_USER=beauty
+      - POSTGRES_DB=beauty
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+
+  beauty-redis:
+    image: redis
+    container_name: beauty-redis
+    networks:
+      - beauty-network
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+
+
+
+networks:
+  beauty-network:
+    driver: bridge
+    ipam:
+      driver: default
+#      config:
+#        - subnet: ${NETWORK_ADDRESS}

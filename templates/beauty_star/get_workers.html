@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static "main_site/js/choose_workers.js" %}"></script>
+{% endblock %}
+
+{% block title %}
+    Выбор услуги
+{% endblock %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static "main_site/css/online_booking.css" %}">
+    <link rel="stylesheet" href="{% static "main_site/css/choose_workers.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-wrapper">
+        <div class="header-container"></div>
+        <div class="header-panel">
+            <div class="back-logo">
+                <a class="back_btn" href="{{ back_url }}">
+                    <img src="{% static "main_site/img/back_arrow.svg" %}">
+                </a>
+                {% if settings.logo %}
+                    <a class="logo" href="{% url "homepage" %}">
+                        <img src="{{ settings.logo.url }}" alt="">
+                    </a>
+                {% endif %}
+            </div>
+            <div>
+                <div class="title">Завиток</div>
+                <div class="address">Никитина 16</div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="menu-items-container">
+                <div class="menu-item-container" id="-1">
+                    <div class="menu-item">
+                        <div class="menu-item-logo">
+                            <div class="logo-icon-container">
+                                <img src="{% static "main_site/img/users.svg" %}">
+                            </div>
+                        </div>
+                        <div class="menu-item-text-container">
+                            <div class="worker_name">
+                                Любой специалист
+                            </div>
+                        </div>
+                        <div class="next-step-icon">
+                            <div class="radio-button-container">
+                                <div class="radio-button">
+                                    <input type="radio" class="radio-button__input" id="radio_-1"
+                                           name="radio-group">
+                                    <label class="radio-button__label" for="radio_-1">
+                                        <span class="radio-button__custom"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for worker in workers %}
+                    <div class="menu-item-container" id="{{ worker.id }}">
+                        <div class="menu-item">
+                            <div class="menu-item-logo">
+                                <div class="logo-icon-container">
+                                    <img src="{{ worker.photo.url }}">
+                                </div>
+                            </div>
+                            <div class="menu-item-text-container">
+                                <div class="worker_name">
+                                    {{ worker.name }} {{ worker.surname }}
+                                </div>
+                                <div class="worker_services">
+                                    {{ worker.service_group_display }}
+                                </div>
+                            </div>
+                            <div class="next-step-icon">
+                                <a class="info_btn" href="{% url "worker_info" worker_id=worker.id %}">
+                                    <img src="{% static "main_site/img/info.svg" %}">
+                                </a>
+                                <div class="radio-button-container">
+                                    <div class="radio-button">
+                                        <input type="radio" class="radio-button__input" id="radio_{{ worker.id }}"
+                                               name="radio-group">
+                                        <label class="radio-button__label" for="radio_{{ worker.id }}">
+                                            <span class="radio-button__custom"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="action_btn_container" data-url="{{ action_url }}">
+            <div class="action_text">
+                {{ action_text }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

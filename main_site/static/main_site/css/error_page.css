@@ -1,0 +1,163 @@
+body {
+    background-color: #5BA19A;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    height: 60%;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.625em;
+}
+
+.text_1 {
+    text-align: left;
+    font-size: 89px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.text_2 {
+    text-align: left;
+    font-size: 27px;
+    text-transform: uppercase;
+}
+
+.wifi img {
+    width: 100px;
+    height: 100px;
+}
+
+.wifi_1 {
+    position: absolute;
+    bottom: -305px;
+    left: 50px;
+}
+
+.wifi_2 {
+    position: absolute;
+    bottom: -200px;
+    left: -100px;
+}
+
+.wifi_3 {
+    position: absolute;
+    bottom: -210px;
+    left: 220px;
+}
+
+.wifi_4 {
+    position: absolute;
+    right: 180px;
+}
+
+.wifi_5 {
+    position: absolute;
+    right: 0;
+    top: 180px
+}
+
+.wifi_6 {
+    position: absolute;
+    right: -50px;
+    top: 50px
+}
+
+.wifi_7 {
+    position: absolute;
+    right: 150px;
+    top: 200px
+}
+
+.wifi_8 {
+    position: absolute;
+    bottom: -300px;
+    left: 350px;
+}
+
+.action_btn_container {
+    position: absolute;
+    width: 600px;
+    right: 10px;
+    bottom: -110px;
+    display: block;
+    cursor: pointer;
+    font-family: 'Montserrat', Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.action_text_negative {
+    width: 95%;
+    margin-left: 16px;
+    text-align: center;
+    position: relative;
+    color: #5b9396;
+    border: 1px solid #5b9396;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    background: white;
+}
+
+/* mobile */
+@media only screen and (max-width: 480px) {
+    .container {
+        width: 280px;
+    }
+
+    .text_1 {
+        font-size: 30px;
+    }
+
+    .text_2 {
+        font-size: 14px;
+    }
+
+    .action_btn_container {
+        width: 280px;
+        margin-bottom: -70px;
+    }
+
+    .wifi img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .wifi_1 {
+        display: none;
+    }
+
+    .wifi_3 {
+        display: none;
+    }
+
+    .wifi_7 {
+        display: none;
+    }
+
+    .wifi_6 {
+        right: 50px;
+    }
+
+    .wifi_4 {
+        display: none;
+    }
+
+    .wifi_8 {
+        left: 200px;
+        bottom: -70px;
+    }
+}
+
+/* end mobile */
