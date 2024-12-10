@@ -8,6 +8,8 @@ services:
     command: ["postgres", "-c", "log_statement=all"]
     networks:
       - beauty-network
+    volumes:
+      - pg_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_INITDB_WALDIR=/var/log/pg_logs
       - POSTGRES_PASSWORD=beauty
@@ -28,7 +30,34 @@ services:
     ports:
       - "6379:6379"
 
+  beauty-application:
+      build: .
+      ports:
+        - "8000:8000"
+      expose:
+        - 8000
+      container_name: beauty-application
+      volumes:
+        - media:/app/media
+      networks:
+        - beauty-network
+      depends_on:
+        - beauty-postgres
+      environment:
+        - C_FORCE_ROOT='true'
+        - PYTHONUNBUFFERED=1
+        - LOCAL_PYTEST=1
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - DB_NAME=${DB_NAME}
+        - DB_PORT=${DB_PORT}
+        - DB_HOST=${DB_HOST}
+        - DEBUG=${DEBUG}
+        - ENVIRONMENT_TYPE=docker
 
+volumes:
+  pg_data:
+  media:
 
 networks:
   beauty-network:
