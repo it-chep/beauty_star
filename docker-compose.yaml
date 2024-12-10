@@ -43,6 +43,7 @@ services:
         - beauty-network
       depends_on:
         - beauty-postgres
+        - beauty-redis
       environment:
         - C_FORCE_ROOT='true'
         - PYTHONUNBUFFERED=1
