@@ -18,11 +18,13 @@ def get_redis(broker_url=None, new_connect=False):
 
 
 def get_redis_client(broker_url=None):
+    broker_url = "redis://beauty-redis:6379"
     try:
         client = get_redis(broker_url)
         client.echo("test")
     except (redis.ConnectionError, redis.ResponseError) as e:
-        raise redis.ConnectionError("Redis not available: {}".format(e))
+        print(redis.ConnectionError("Redis not available: {}".format(e)))
+        return
     return client
 
 
