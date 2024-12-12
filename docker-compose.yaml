@@ -12,9 +12,9 @@ services:
       - pg_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_INITDB_WALDIR=/var/log/pg_logs
-      - POSTGRES_PASSWORD=beauty
-      - POSTGRES_USER=beauty
-      - POSTGRES_DB=beauty
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
     expose:
       - "5432"
     ports:
