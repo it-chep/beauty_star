@@ -14,7 +14,6 @@
     <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
     <script src="{% static "js/select2.min.js" %}"></script>
     <script src="{% static "js/jquery-ui.min.js" %}"></script>
-    <script src="{% static "main_site/js/base.js" %}"></script>
 
     {% block extra_scripts %}
     {% endblock %}
@@ -38,5 +37,8 @@
 {% block content %}
 {% endblock %}
 
+{% block body_scripts %}
+        <script src="{% static "main_site/js/base.js" %}"></script>
+{% endblock %}
 </body>
 </html>
