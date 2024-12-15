@@ -217,7 +217,7 @@ class GetServiceView(TemplateView):
             context["back_url"] = get_site_url() + reverse('get_worker')
             context["action_text"] = 'Выберите дату и время'
 
-        services_by_subgroup = {}
+        services_by_group = {}
 
         if worker_id == -1 or not worker_id and not period_id:
             services = Service.objects.annotate(num_workers=Count('worker')).filter(num_workers__gt=0)
@@ -237,12 +237,16 @@ class GetServiceView(TemplateView):
             else:
                 services = []
 
+        # Группируем услуги по группам и подгруппам
         for service in services:
-            if service.subgroup not in services_by_subgroup:
-                services_by_subgroup[service.subgroup] = []
-            services_by_subgroup[service.subgroup].append(service)
+            group = service.subgroup.service_group
+            if group not in services_by_group:
+                services_by_group[group] = {}
+            if service.subgroup not in services_by_group[group]:
+                services_by_group[group][service.subgroup] = []
+            services_by_group[group][service.subgroup].append(service)
 
-        context['services_by_subgroup'] = services_by_subgroup
+        context['services_by_group'] = services_by_group
 
         return context
 

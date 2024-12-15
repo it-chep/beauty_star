@@ -633,6 +633,14 @@ footer {
     gap: 30px;
 }
 
+.workers-container::-webkit-scrollbar {
+  width: 0;
+}
+
+.cases_slider::-webkit-scrollbar {
+  width: 0;
+}
+
 .worker_card {
     padding: 20px;
     text-decoration: unset;
