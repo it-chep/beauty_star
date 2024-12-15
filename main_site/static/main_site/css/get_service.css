@@ -44,4 +44,23 @@
     cursor: pointer;
 }
 
+.subgroup-title {
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0;
+    user-select: none;
+}
 
+.subgroup-title.collapsed::after {
+    content: " [▼]";
+}
+
+.subgroup-title:not(.collapsed)::after {
+    content: " [▶]";
+}
+
+.item-container {
+    display: flex;
+    overflow: hidden;
+    height: auto;
+}

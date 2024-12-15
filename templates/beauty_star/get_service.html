@@ -39,25 +39,30 @@
         </div>
         <div class="container">
             <div class="menu-items-container">
-                {% for service in services %}
-                    <div class="item-container" id="{{ service.id }}">
-                        <div class="service-item-container">
-                            <div class="service-item">
-                                <div class="service-title">{{ service.name }}</div>
-                                <div class="service-time_over">{{ service.time_over }} min
-                                    <div class="service_description"></div>
+                {% for subgroup, services in services_by_subgroup.items %}
+                    <div class="subgroup-container">
+                        <h3 class="subgroup-title">{{ subgroup.name }}</h3>
+                        {% for service in services %}
+                            <div class="item-container" id="{{ service.id }}">
+                                <div class="service-item-container">
+                                    <div class="service-item">
+                                        <div class="service-title">{{ service.name }}</div>
+                                        <div class="service-time_over">{{ service.time_over }} min
+                                            <div class="service_description"></div>
+                                        </div>
+                                        <div class="service-price">от {{ service.price|floatformat:0 }} ₽</div>
+                                    </div>
                                 </div>
-                                <div class="service-price">от {{ service.price|floatformat:0 }} ₽</div>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="service_{{ service.id }}" type="checkbox" name="service-select">
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="content">
-                                <label class="checkBox">
-                                    <input id="service_{{ service.id }}" type="checkbox" name="service-select">
-                                    <div class="transition"></div>
-                                </label>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 {% endfor %}
             </div>

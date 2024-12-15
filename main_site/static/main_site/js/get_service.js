@@ -1,4 +1,13 @@
 $(document).ready(function () {
+    $(".subgroup-title").on("click", function () {
+        $(this).toggleClass("collapsed");
+        $(this).siblings(".item-container").slideToggle();
+    });
+
+    $(".item-container").css({
+        display: 'none',
+    });
+
     $('.item-container').on('click', function () {
         const serviceId = $(this).attr('id');
         const checkbox = $(`#service_${serviceId}`);

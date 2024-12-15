@@ -217,10 +217,10 @@ class GetServiceView(TemplateView):
             context["back_url"] = get_site_url() + reverse('get_worker')
             context["action_text"] = 'Выберите дату и время'
 
-        if worker_id == -1 or not worker_id and not period_id:
-            context['services'] = Service.objects.annotate(num_workers=Count('worker')).filter(num_workers__gt=0)
+        services_by_subgroup = {}
 
-            return context
+        if worker_id == -1 or not worker_id and not period_id:
+            services = Service.objects.annotate(num_workers=Count('worker')).filter(num_workers__gt=0)
         elif worker_id == -1 or not worker_id and period_id:
             workers = Worker.objects.filter(
                 schedules__periods__id=period_id,
@@ -229,14 +229,20 @@ class GetServiceView(TemplateView):
             for worker in workers:
                 for service in worker.services.all():
                     services.add(service)
-            if workers:
-                context['services'] = services
-            return context
+        else:
+            worker = workers.filter(id=worker_id).prefetch_related('services').first()
+            if worker:
+                services = worker.services.all()
+                context['worker'] = worker
+            else:
+                services = []
 
-        worker = workers.filter(id=worker_id).prefetch_related('services').first()
-        if worker:
-            context['services'] = worker.services.all()
-        context['worker'] = worker
+        for service in services:
+            if service.subgroup not in services_by_subgroup:
+                services_by_subgroup[service.subgroup] = []
+            services_by_subgroup[service.subgroup].append(service)
+
+        context['services_by_subgroup'] = services_by_subgroup
 
         return context
 
